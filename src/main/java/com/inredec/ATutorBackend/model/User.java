@@ -42,7 +42,7 @@ public class User extends DateAudit {
     @Size(max = 100)
     private String password;
 
-    private String url_image;
+    //private String url_image;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -50,8 +50,11 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy="user",cascade= CascadeType.ALL)
-    private Set<Mark> marks = new HashSet<>();
+    /*@OneToMany(mappedBy="user",cascade= CascadeType.ALL)
+    @JoinTable(name = "user_marks",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "mark_id"))
+    private Set<Mark> marks = new HashSet<>();*/
 
     public User() {
 

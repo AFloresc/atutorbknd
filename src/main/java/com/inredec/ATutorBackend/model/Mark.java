@@ -9,10 +9,14 @@ import java.util.Date;
 
 @Entity
 @Table(name="mark")
-@EntityListeners(AuditingEntityListener.class)
 //@IdClass(MarkId.class)
 public class Mark implements Serializable {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private Float value;
 
 }
 
