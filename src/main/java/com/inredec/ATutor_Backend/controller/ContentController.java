@@ -51,9 +51,9 @@ public class ContentController {
         }).orElseThrow(() -> new ResourceNotFoundException("ContentId ", "not found", contentId));
     }
 
-    @DeleteMapping("/lessons/{lessonId}/concepts/{conceptId}")
+    @DeleteMapping("/lessons/{lessonId}/content/{contentId}")
     public ResponseEntity<?> deleteContent(@PathVariable (value = "lessonId") Long lessonId,
-                                           @PathVariable (value = "conceptId") Long conceptId) {
+                                           @PathVariable (value = "contentId") Long conceptId) {
         if(!lessonRepository.existsById(lessonId)) {
             throw new ResourceNotFoundException("lessonId ", " not found", lessonId);
         }

@@ -3,6 +3,7 @@ package com.inredec.ATutor_Backend.controller;
 
 import com.inredec.ATutor_Backend.exception.ResourceNotFoundException;
 import com.inredec.ATutor_Backend.model.User;
+import com.inredec.ATutor_Backend.payload.UserAuth;
 import com.inredec.ATutor_Backend.payload.UserIdentityAvailability;
 import com.inredec.ATutor_Backend.payload.UserProfile;
 import com.inredec.ATutor_Backend.repository.UserRepository;
@@ -22,6 +23,15 @@ public class UserController {
     private UserRepository userRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
+    @GetMapping("/user/checklogin/{username}/pass/{pass}")
+    public UserAuth checkUserAuthorized(@PathVariable (value = "username") String username,
+                                        @PathVariable (value = "pass") String pass){
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "username", username));
+        return new UserAuth(user.getPassword() == pass);
+    }
+
 
     @GetMapping("/user/checkUsernameAvailability")
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
